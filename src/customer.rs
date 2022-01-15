@@ -22,28 +22,18 @@ pub trait Free {
     fn feature2(&self);
 }
 
-/// 付费用户高级功能
+/// 付费用户高级功能, 继承自 Free
 pub trait Personal: Free {
     fn advance_feature(&self);
 }
 
-impl<T> free for Customer<T> {
+impl<T> Free for Customer<T> {
     fn feature1(&self) {
         println!("{} has feature 1", self.name);
     }
 
     fn feature2(&self) {
         println!("{} has feature 2", self.name);
-    }
-}
-
-impl Free for Customer<PersonalPlan> {
-    fn feature1(&self) {
-        todo!()
-    }
-
-    fn feature2(&self) {
-        todo!()
     }
 }
 
@@ -70,6 +60,7 @@ impl<T> Customer<T> {
     }
 }
 
+/// 免费用户转换到付费用户
 impl From<Customer<FreePlan>> for Customer<PersonalPlan> {
     fn from(c: Customer<FreePlan>) -> Self {
         Self::new(c.name)

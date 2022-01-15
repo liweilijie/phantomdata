@@ -29,7 +29,7 @@ mod tests {
         let user = User::default();
         let product = Product::default();
 
-        // 两个 id 不能比较，因为他们属于不同的类型
+        // 两个 id 不能比较，因为他们属于不同的类型, 这时候编译器就会直接报错,从而在编译的时候就杜绝了这类错误
         // assert_ne!(user.id, product.id);
 
         assert_eq!(user.id.inner, product.id.inner);
